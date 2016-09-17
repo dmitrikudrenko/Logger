@@ -82,6 +82,7 @@ public class OutputStreamLogger implements ILogger {
     private void append(String message) {
         try {
             outputStreamWriter.append(message).append("\n");
+            outputStreamWriter.flush();
         } catch (IOException e) {
             Log.e(OutputStreamLogger.class.getName(), e.getMessage(), e);
         }
