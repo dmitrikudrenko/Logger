@@ -5,19 +5,21 @@ Simple alternative to android Log
 
 Download
 --------
+[ ![Download](https://api.bintray.com/packages/dmitrikudrenko/maven/Logger/images/download.svg) ](https://bintray.com/dmitrikudrenko/maven/Logger/_latestVersion)
+
 Maven
 ```xml
 <dependency>
   <groupId>io.github.dmitrikudrenko</groupId>
   <artifactId>logger</artifactId>
-  <version>1.0.0</version>
+  <version>1.1</version>
   <type>pom</type>
 </dependency>
 ```
 
 Gradle
 ```groovy
-compile 'io.github.dmitrikudrenko:logger:1.0.0'
+compile 'io.github.dmitrikudrenko:logger:1.1'
 ```
 
 License
