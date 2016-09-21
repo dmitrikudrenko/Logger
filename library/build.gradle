@@ -4,7 +4,7 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     groupId = 'io.github.dmitrikudrenko'
     artifactId = 'logger'
-    publishVersion = '1.0.0'
+    publishVersion = libraryVersionName
     desc = 'Simple alternative to android Log.'
     licences = ['Apache-2.0']
     uploadName='ContentManager'
@@ -12,14 +12,14 @@ publish {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+        versionCode libraryVersionCode
+        versionName libraryVersionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
