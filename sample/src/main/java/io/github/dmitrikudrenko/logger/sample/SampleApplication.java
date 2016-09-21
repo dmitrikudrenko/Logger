@@ -2,13 +2,12 @@ package io.github.dmitrikudrenko.logger.sample;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileNotFoundException;
 
-import io.github.dmitrikudrenko.logger.AndroidLogger;
 import io.github.dmitrikudrenko.logger.Logger;
-import io.github.dmitrikudrenko.logger.OutputStreamLogger;
+import io.github.dmitrikudrenko.logger.impl.AndroidLogger;
+import io.github.dmitrikudrenko.logger.impl.OutputStreamLogger;
 
 public class SampleApplication extends Application {
     @Override

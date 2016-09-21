@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import io.github.dmitrikudrenko.logger.ActivityEvents;
 import io.github.dmitrikudrenko.logger.Logger;
-import io.github.dmitrikudrenko.logger.ViewEvents;
+import io.github.dmitrikudrenko.logger.events.ActivityEvents;
+import io.github.dmitrikudrenko.logger.events.ViewEvents;
 
 public class Activity1 extends Activity {
     @Override

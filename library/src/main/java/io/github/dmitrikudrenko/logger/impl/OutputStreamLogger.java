@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger;
+package io.github.dmitrikudrenko.logger.impl;
 
 import android.app.Activity;
 import android.util.Log;
@@ -8,8 +8,9 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+
+import io.github.dmitrikudrenko.logger.ILogger;
+import io.github.dmitrikudrenko.logger.events.LogEvent;
 
 public class OutputStreamLogger implements ILogger {
     private static final String DELIMITER = " ";
@@ -17,6 +18,7 @@ public class OutputStreamLogger implements ILogger {
     private static final String W = "warning/";
     private static final String D = "debug/";
     private static final String E = "error/";
+    private static final String V = "verbose/";
     private static final String EV = "event/";
 
     private OutputStreamWriter outputStreamWriter;
@@ -66,17 +68,32 @@ public class OutputStreamLogger implements ILogger {
     }
 
     @Override
-    public void event(ViewEvents event, View view) {
+    public void v(String tag, String message) {
+        append(V + tag + DELIMITER + message);
+    }
+
+    @Override
+    public void v(String tag, String message, Throwable throwable) {
+        append(V + tag + DELIMITER + message + DELIMITER + getStackTrace(throwable));
+    }
+
+    @Override
+    public void event(LogEvent event) {
+        append(EV + event.getValue());
+    }
+
+    @Override
+    public void event(LogEvent event, View view) {
         String caption;
         if (view instanceof TextView) {
             caption = ((TextView) view).getText().toString();
         } else caption = view.getClass().toString();
-        append(EV + event.name() + DELIMITER + caption);
+        append(EV + event.getValue() + DELIMITER + caption);
     }
 
     @Override
-    public void event(ActivityEvents event, Class<? extends Activity> activityClass) {
-        append(EV + event.name() + DELIMITER + activityClass.getName());
+    public void event(LogEvent event, Class<? extends Activity> activityClass) {
+        append(EV + event.getValue() + DELIMITER + activityClass.getName());
     }
 
     private void append(String message) {
@@ -89,9 +106,6 @@ public class OutputStreamLogger implements ILogger {
     }
 
     private String getStackTrace(Throwable throwable) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        throwable.printStackTrace(printWriter);
-        return stringWriter.toString();
+        return Log.getStackTraceString(throwable);
     }
 }

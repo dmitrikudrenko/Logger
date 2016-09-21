@@ -1,9 +1,12 @@
-package io.github.dmitrikudrenko.logger;
+package io.github.dmitrikudrenko.logger.impl;
 
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import io.github.dmitrikudrenko.logger.ILogger;
+import io.github.dmitrikudrenko.logger.events.LogEvent;
 
 public class AndroidLogger implements ILogger {
     @Override
@@ -47,16 +50,31 @@ public class AndroidLogger implements ILogger {
     }
 
     @Override
-    public void event(ViewEvents event, View view) {
+    public void v(String tag, String message) {
+        Log.v(tag, message);
+    }
+
+    @Override
+    public void v(String tag, String message, Throwable throwable) {
+        Log.v(tag, message, throwable);
+    }
+
+    @Override
+    public void event(LogEvent event) {
+        Log.i(event.getValue(), event.getValue());
+    }
+
+    @Override
+    public void event(LogEvent event, View view) {
         String caption;
         if (view instanceof TextView) {
             caption = ((TextView) view).getText().toString();
         } else caption = view.getClass().toString();
-        Log.i(event.name(), caption);
+        Log.i(event.getValue(), caption);
     }
 
     @Override
-    public void event(ActivityEvents event, Class<? extends Activity> activityClass) {
-        Log.i(event.name(), activityClass.getName());
+    public void event(LogEvent event, Class<? extends Activity> activityClass) {
+        Log.i(event.getValue(), activityClass.getName());
     }
 }

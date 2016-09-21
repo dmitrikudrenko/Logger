@@ -6,7 +6,9 @@ import android.view.View;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public final class Logger implements LoggerCombiner, ILogger {
+import io.github.dmitrikudrenko.logger.events.LogEvent;
+
+public class Logger implements LoggerCombiner, ILogger {
     private List<ILogger> loggers = new CopyOnWriteArrayList<>();
     private static Logger INSTANCE;
 
@@ -89,14 +91,35 @@ public final class Logger implements LoggerCombiner, ILogger {
     }
 
     @Override
-    public synchronized void event(ViewEvents event, View view) {
+    public void v(String tag, String message) {
+        for (ILogger logger : loggers) {
+            logger.v(tag, message);
+        }
+    }
+
+    @Override
+    public void v(String tag, String message, Throwable throwable) {
+        for (ILogger logger : loggers) {
+            logger.v(tag, message, throwable);
+        }
+    }
+
+    @Override
+    public void event(LogEvent event) {
+        for (ILogger logger : loggers) {
+            logger.event(event);
+        }
+    }
+
+    @Override
+    public synchronized void event(LogEvent event, View view) {
         for (ILogger logger : loggers) {
             logger.event(event, view);
         }
     }
 
     @Override
-    public synchronized void event(ActivityEvents event, Class<? extends Activity> activityClass) {
+    public synchronized void event(LogEvent event, Class<? extends Activity> activityClass) {
         for (ILogger logger : loggers) {
             logger.event(event, activityClass);
         }
