@@ -12,14 +12,14 @@ Maven
 <dependency>
   <groupId>io.github.dmitrikudrenko</groupId>
   <artifactId>logger</artifactId>
-  <version>1.1</version>
+  <version>$latestVersion</version>
   <type>pom</type>
 </dependency>
 ```
 
 Gradle
 ```groovy
-compile 'io.github.dmitrikudrenko:logger:1.1'
+compile 'io.github.dmitrikudrenko:logger:$latestVersion'
 ```
 
 License

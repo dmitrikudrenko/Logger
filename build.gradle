@@ -29,6 +29,6 @@ project.ext {
     androidMinSdkVersion = 14
     androidTargetSdkVersion = 24
 
-    libraryVersionCode = 2
-    libraryVersionName = "1.1"
+    libraryVersionCode = 3
+    libraryVersionName = "1.2"
 }
