@@ -3,7 +3,6 @@ package io.github.dmitrikudrenko.logger.impl;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -11,6 +10,8 @@ import java.io.OutputStreamWriter;
 
 import io.github.dmitrikudrenko.logger.ILogger;
 import io.github.dmitrikudrenko.logger.events.LogEvent;
+
+import static io.github.dmitrikudrenko.logger.LogUtils.getViewCaption;
 
 public class OutputStreamLogger implements ILogger {
     private static final String DELIMITER = " ";
@@ -83,12 +84,13 @@ public class OutputStreamLogger implements ILogger {
     }
 
     @Override
+    public void event(LogEvent event, String message) {
+        append(EV + event.getValue() + DELIMITER + message);
+    }
+
+    @Override
     public void event(LogEvent event, View view) {
-        String caption;
-        if (view instanceof TextView) {
-            caption = ((TextView) view).getText().toString();
-        } else caption = view.getClass().toString();
-        append(EV + event.getValue() + DELIMITER + caption);
+        append(EV + event.getValue() + DELIMITER + getViewCaption(view));
     }
 
     @Override

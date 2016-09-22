@@ -1,6 +1,6 @@
 package io.github.dmitrikudrenko.logger;
 
 public interface LoggerCombiner {
-    void addLogger(ILogger logger);
-    void removeLogger(ILogger logger);
+    LoggerCombiner addLogger(ILogger logger);
+    LoggerCombiner removeLogger(ILogger logger);
 }

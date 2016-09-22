@@ -22,6 +22,7 @@ public interface ILogger {
     void v(String tag, String message, Throwable throwable);
 
     void event(LogEvent event);
+    void event(LogEvent event, String message);
     void event(LogEvent event, View view);
     void event(LogEvent event, Class<? extends Activity> activityClass);
 }

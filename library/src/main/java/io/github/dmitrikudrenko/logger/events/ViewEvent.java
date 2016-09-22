@@ -1,6 +1,6 @@
 package io.github.dmitrikudrenko.logger.events;
 
-public enum ViewEvents implements LogEvent {
+public enum ViewEvent implements LogEvent {
     TOUCH {
         @Override
         public String getValue() {

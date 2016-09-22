@@ -3,10 +3,11 @@ package io.github.dmitrikudrenko.logger.impl;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import io.github.dmitrikudrenko.logger.ILogger;
 import io.github.dmitrikudrenko.logger.events.LogEvent;
+
+import static io.github.dmitrikudrenko.logger.LogUtils.getViewCaption;
 
 public class AndroidLogger implements ILogger {
     @Override
@@ -65,12 +66,13 @@ public class AndroidLogger implements ILogger {
     }
 
     @Override
+    public void event(LogEvent event, String message) {
+        Log.i(event.getValue(), message);
+    }
+
+    @Override
     public void event(LogEvent event, View view) {
-        String caption;
-        if (view instanceof TextView) {
-            caption = ((TextView) view).getText().toString();
-        } else caption = view.getClass().toString();
-        Log.i(event.getValue(), caption);
+        Log.i(event.getValue(), getViewCaption(view));
     }
 
     @Override

@@ -8,6 +8,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.github.dmitrikudrenko.logger.events.LogEvent;
 
+import static io.github.dmitrikudrenko.logger.LogUtils.getViewCaption;
+
 public class Logger implements LoggerCombiner, ILogger {
     private List<ILogger> loggers = new CopyOnWriteArrayList<>();
     private static Logger INSTANCE;
@@ -25,13 +27,15 @@ public class Logger implements LoggerCombiner, ILogger {
     }
 
     @Override
-    public synchronized void addLogger(ILogger logger) {
+    public synchronized LoggerCombiner addLogger(ILogger logger) {
         loggers.add(logger);
+        return this;
     }
 
     @Override
-    public synchronized void removeLogger(ILogger logger) {
+    public synchronized LoggerCombiner removeLogger(ILogger logger) {
         loggers.remove(logger);
+        return this;
     }
 
     @Override
@@ -112,16 +116,23 @@ public class Logger implements LoggerCombiner, ILogger {
     }
 
     @Override
+    public void event(LogEvent event, String message) {
+        for (ILogger logger : loggers) {
+            logger.event(event, message);
+        }
+    }
+
+    @Override
     public synchronized void event(LogEvent event, View view) {
         for (ILogger logger : loggers) {
-            logger.event(event, view);
+            logger.event(event, getViewCaption(view));
         }
     }
 
     @Override
     public synchronized void event(LogEvent event, Class<? extends Activity> activityClass) {
         for (ILogger logger : loggers) {
-            logger.event(event, activityClass);
+            logger.event(event, activityClass.getName());
         }
     }
 }

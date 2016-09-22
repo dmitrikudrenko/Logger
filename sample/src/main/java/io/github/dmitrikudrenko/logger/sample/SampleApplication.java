@@ -13,8 +13,9 @@ public class SampleApplication extends Application {
     @Override
     public void onCreate() {
         try {
-            Logger.getInstance().addLogger(new AndroidLogger());
-            Logger.getInstance().addLogger(new OutputStreamLogger(openFileOutput("log.txt", Context.MODE_APPEND)));
+            Logger.getInstance()
+                    .addLogger(new AndroidLogger())
+                    .addLogger(new OutputStreamLogger(openFileOutput("log.txt", Context.MODE_APPEND)));
         } catch (FileNotFoundException e) {
             Logger.getInstance().e("Logger initializing", e.getMessage(), e);
         }
