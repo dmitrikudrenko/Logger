@@ -7,6 +7,8 @@ import android.view.View;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
+import java.util.Date;
 
 import io.github.dmitrikudrenko.logger.ILogger;
 import io.github.dmitrikudrenko.logger.events.LogEvent;
@@ -21,6 +23,9 @@ public class OutputStreamLogger implements ILogger {
     private static final String E = "error/";
     private static final String V = "verbose/";
     private static final String EV = "event/";
+
+    private boolean isTimestampEnabled = true;
+    private DateFormat timestampFormat = DateFormat.getDateTimeInstance();
 
     private OutputStreamWriter outputStreamWriter;
 
@@ -100,6 +105,9 @@ public class OutputStreamLogger implements ILogger {
 
     private void append(String message) {
         try {
+            if (isTimestampEnabled) {
+                outputStreamWriter.append(timestampFormat.format(new Date())).append(DELIMITER);
+            }
             outputStreamWriter.append(message).append("\n");
             outputStreamWriter.flush();
         } catch (IOException e) {
@@ -109,5 +117,10 @@ public class OutputStreamLogger implements ILogger {
 
     private String getStackTrace(Throwable throwable) {
         return Log.getStackTraceString(throwable);
+    }
+
+    public OutputStreamLogger setTimestampEnabled(boolean enabled) {
+        this.isTimestampEnabled = enabled;
+        return this;
     }
 }
