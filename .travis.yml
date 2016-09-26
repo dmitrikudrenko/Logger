@@ -6,5 +6,8 @@ android:
   lisenses:
     - 'android-sdk-license-.+'
 
+jdk:
+  - oraclejdk8
+
 before_install:
  - chmod +x gradlew
