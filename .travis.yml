@@ -15,6 +15,9 @@ jdk:
   - oraclejdk8
 
 before_install:
- - chmod +x gradlew
+  - chmod +x gradlew
+
+after_success:
+  - .buildscript/deploy_snapshot.sh
 
 script: ./gradlew build

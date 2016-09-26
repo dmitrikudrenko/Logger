@@ -6,6 +6,7 @@ Simple alternative to android Log
 Download
 --------
 [ ![Download](https://api.bintray.com/packages/dmitrikudrenko/maven/Logger/images/download.svg) ](https://bintray.com/dmitrikudrenko/maven/Logger/_latestVersion)
+[![Build Status](https://travis-ci.org/dmitrikudrenko/Logger.svg?branch=master)](https://travis-ci.org/dmitrikudrenko/Logger)
 
 Maven
 ```xml
