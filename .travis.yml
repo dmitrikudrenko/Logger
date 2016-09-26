@@ -5,3 +5,6 @@ android:
     - android-24
   lisenses:
     - 'android-sdk-license-.+'
+
+before_install:
+ - chmod +x gradlew
