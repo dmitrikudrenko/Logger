@@ -74,6 +74,11 @@ public class OutputStreamLogger implements ILogger {
     }
 
     @Override
+    public void e(Throwable throwable) {
+        append(E + "No tag" + DELIMITER + throwable.getMessage() + DELIMITER + getStackTrace(throwable));
+    }
+
+    @Override
     public void v(String tag, String message) {
         append(V + tag + DELIMITER + message);
     }

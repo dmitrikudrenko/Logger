@@ -51,6 +51,11 @@ public class AndroidLogger implements ILogger {
     }
 
     @Override
+    public void e(Throwable throwable) {
+        Log.e("No tag", throwable.getMessage(), throwable);
+    }
+
+    @Override
     public void v(String tag, String message) {
         Log.v(tag, message);
     }

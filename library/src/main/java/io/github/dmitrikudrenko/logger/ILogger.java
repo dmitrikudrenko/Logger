@@ -17,6 +17,7 @@ public interface ILogger {
 
     void e(String tag, String message);
     void e(String tag, String message, Throwable throwable);
+    void e(Throwable throwable);
 
     void v(String tag, String message);
     void v(String tag, String message, Throwable throwable);

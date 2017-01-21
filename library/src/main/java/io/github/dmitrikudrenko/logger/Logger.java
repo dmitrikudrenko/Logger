@@ -95,6 +95,13 @@ public class Logger implements LoggerCombiner, ILogger {
     }
 
     @Override
+    public void e(Throwable throwable) {
+        for (ILogger logger : loggers) {
+            logger.e(throwable);
+        }
+    }
+
+    @Override
     public void v(String tag, String message) {
         for (ILogger logger : loggers) {
             logger.v(tag, message);
