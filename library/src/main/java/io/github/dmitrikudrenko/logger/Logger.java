@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import io.github.dmitrikudrenko.logger.events.LogEvent;
@@ -126,6 +127,13 @@ public class Logger implements LoggerCombiner, ILogger {
     public void event(LogEvent event, String message) {
         for (ILogger logger : loggers) {
             logger.event(event, message);
+        }
+    }
+
+    @Override
+    public void event(LogEvent event, Map<String, Object> attributes) {
+        for (ILogger logger : loggers) {
+            logger.event(event, attributes);
         }
     }
 

@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import io.github.dmitrikudrenko.logger.ILogger;
 import io.github.dmitrikudrenko.logger.events.LogEvent;
@@ -96,6 +97,11 @@ public class OutputStreamLogger implements ILogger {
     @Override
     public void event(LogEvent event, String message) {
         append(EV + event.getValue() + DELIMITER + message);
+    }
+
+    @Override
+    public void event(LogEvent event, Map<String, Object> attributes) {
+        append(EV + event.getValue() + DELIMITER + attributes.toString());
     }
 
     @Override
