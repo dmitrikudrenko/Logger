@@ -3,44 +3,45 @@ package io.github.dmitrikudrenko.logger.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import io.github.dmitrikudrenko.logger.Logger;
-import io.github.dmitrikudrenko.logger.events.ActivityLifecycleEvent;
+import io.github.dmitrikudrenko.logger2.Logger;
+import io.github.dmitrikudrenko.logger2.events.ActivityLifecycleEvent;
 
 public abstract class GenericActivity extends Activity {
+    protected Logger logger = Logger.getInstance();
+
     @Override
     protected void onStart() {
         super.onStart();
-        Logger.getInstance().event(ActivityLifecycleEvent.START, getClass());
+        logger.event(ActivityLifecycleEvent.START, getClass());
     }
 
     @Override
     protected void onStop() {
-        Logger.getInstance().event(ActivityLifecycleEvent.STOP, getClass());
+        logger.event(ActivityLifecycleEvent.STOP, getClass());
         super.onStop();
     }
 
     @Override
     protected void onPause() {
-        Logger.getInstance().event(ActivityLifecycleEvent.PAUSE, getClass());
+        logger.event(ActivityLifecycleEvent.PAUSE, getClass());
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Logger.getInstance().event(ActivityLifecycleEvent.RESUME, getClass());
+        logger.event(ActivityLifecycleEvent.RESUME, getClass());
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Logger.getInstance().event(ActivityLifecycleEvent.CREATE, getClass());
+        logger.event(ActivityLifecycleEvent.CREATE, getClass());
     }
 
     @Override
     protected void onDestroy() {
-        Logger.getInstance().event(ActivityLifecycleEvent.DESTROY, getClass());
+        logger.event(ActivityLifecycleEvent.DESTROY, getClass());
         super.onDestroy();
     }
 }

@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger;
+package io.github.dmitrikudrenko.logger2;
 
 
 import android.view.View;

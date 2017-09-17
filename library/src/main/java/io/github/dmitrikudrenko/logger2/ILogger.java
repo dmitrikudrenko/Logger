@@ -1,9 +1,8 @@
-package io.github.dmitrikudrenko.logger;
+package io.github.dmitrikudrenko.logger2;
 
 import android.app.Activity;
 import android.view.View;
-
-import io.github.dmitrikudrenko.logger.events.LogEvent;
+import io.github.dmitrikudrenko.logger2.events.LogEvent;
 
 public interface ILogger {
     void i(String tag, String message);

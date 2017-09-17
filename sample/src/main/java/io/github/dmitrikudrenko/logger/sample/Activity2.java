@@ -2,9 +2,7 @@ package io.github.dmitrikudrenko.logger.sample;
 
 import android.os.Bundle;
 import android.view.View;
-
-import io.github.dmitrikudrenko.logger.Logger;
-import io.github.dmitrikudrenko.logger.events.ViewEvent;
+import io.github.dmitrikudrenko.logger2.events.ViewEvent;
 
 public class Activity2 extends GenericActivity {
     @Override
@@ -14,7 +12,7 @@ public class Activity2 extends GenericActivity {
     }
 
     public void clickButton(View view) {
-        Logger.getInstance().event(ViewEvent.CLICK, view);
+        logger.event(ViewEvent.CLICK, view);
         onBackPressed();
     }
 }

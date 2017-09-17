@@ -1,8 +1,10 @@
-package io.github.dmitrikudrenko.logger.impl;
+package io.github.dmitrikudrenko.logger2.impl;
 
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import io.github.dmitrikudrenko.logger2.ILogger;
+import io.github.dmitrikudrenko.logger2.events.LogEvent;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,10 +12,7 @@ import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.Date;
 
-import io.github.dmitrikudrenko.logger.ILogger;
-import io.github.dmitrikudrenko.logger.events.LogEvent;
-
-import static io.github.dmitrikudrenko.logger.LogUtils.getViewCaption;
+import static io.github.dmitrikudrenko.logger2.LogUtils.getViewCaption;
 
 public class OutputStreamLogger implements ILogger {
     private static final String DELIMITER = " ";
