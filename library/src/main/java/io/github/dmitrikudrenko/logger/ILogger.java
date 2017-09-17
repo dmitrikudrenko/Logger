@@ -3,6 +3,8 @@ package io.github.dmitrikudrenko.logger;
 import android.app.Activity;
 import android.view.View;
 
+import java.util.Map;
+
 import io.github.dmitrikudrenko.logger.events.LogEvent;
 
 public interface ILogger {
@@ -24,6 +26,7 @@ public interface ILogger {
 
     void event(LogEvent event);
     void event(LogEvent event, String message);
+    void event(LogEvent event, Map<String, Object> attributes);
     void event(LogEvent event, View view);
     void event(LogEvent event, Class<? extends Activity> activityClass);
 }

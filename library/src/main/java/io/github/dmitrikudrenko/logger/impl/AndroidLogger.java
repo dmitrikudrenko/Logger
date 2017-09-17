@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 
+import java.util.Map;
+
 import io.github.dmitrikudrenko.logger.ILogger;
 import io.github.dmitrikudrenko.logger.events.LogEvent;
 
@@ -73,6 +75,11 @@ public class AndroidLogger implements ILogger {
     @Override
     public void event(LogEvent event, String message) {
         Log.i(event.getValue(), message);
+    }
+
+    @Override
+    public void event(LogEvent event, Map<String, Object> attributes) {
+        Log.i(event.getValue(), attributes.toString());
     }
 
     @Override
