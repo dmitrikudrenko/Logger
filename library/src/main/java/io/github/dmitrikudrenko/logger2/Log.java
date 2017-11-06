@@ -40,7 +40,7 @@ public final class Log {
     };
 
     @VisibleForTesting
-    static Logger logger;
+    private static final Logger logger;
 
     static {
         final LogManager manager = LogManager.getLogManager();
