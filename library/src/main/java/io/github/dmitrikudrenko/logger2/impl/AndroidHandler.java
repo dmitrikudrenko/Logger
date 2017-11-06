@@ -16,7 +16,11 @@ public class AndroidHandler extends Handler {
     @Override
     public void publish(LogRecord record) {
         Level level = record.getLevel();
-        Log.println(getAndroidLevel(level), record.getLoggerName(), getFormatter().format(record));
+        String tag = record.getLoggerName();
+        if (tag.length() > 23) {
+            tag = tag.substring(0, 23);
+        }
+        Log.println(getAndroidLevel(level), tag, getFormatter().format(record));
     }
 
     private int getAndroidLevel(Level level) {

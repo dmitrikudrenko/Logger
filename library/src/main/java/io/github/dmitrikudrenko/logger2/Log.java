@@ -1,9 +1,9 @@
 package io.github.dmitrikudrenko.logger2;
 
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import io.github.dmitrikudrenko.logger2.events.LogEvent;
 import io.github.dmitrikudrenko.logger2.impl.AndroidHandler;
-import io.reactivex.annotations.Nullable;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,21 +18,29 @@ public final class Log {
     private static final Level VERBOSE = new Verbose();
     private static final Level DEBUG = new Debug();
 
-    public static final Handler ANDROID = new AndroidHandler();
-
-    private static final Formatter FORMATTER = new Formatter() {
+    private static final Formatter SIMPLE_FORMATTER = new Formatter() {
         @Override
         public String format(final LogRecord r) {
             final Throwable thrown = r.getThrown();
+            String message;
             if (thrown != null) {
-                return "\n" + Log.toString(thrown);
+                message = Log.toString(thrown);
             } else {
-                return r.getMessage();
+                message = r.getMessage();
             }
+            return message;
         }
     };
 
-    private static final Logger logger;
+    private static final Formatter FORMATTER = new Formatter() {
+        @Override
+        public String format(LogRecord record) {
+            return record.getLoggerName() + ": " + SIMPLE_FORMATTER.format(record) + "\n";
+        }
+    };
+
+    @VisibleForTesting
+    static Logger logger;
 
     static {
         final LogManager manager = LogManager.getLogManager();
@@ -40,9 +48,17 @@ public final class Log {
         logger.setLevel(Level.ALL);
     }
 
-    public static void addHandler(Handler handler) {
-        handler.setFormatter(FORMATTER);
+    public static void setup() {
+        addHandler(new AndroidHandler(), SIMPLE_FORMATTER);
+    }
+
+    private static void addHandler(Handler handler, Formatter formatter) {
+        handler.setFormatter(formatter);
         logger.addHandler(handler);
+    }
+
+    public static void addHandler(Handler handler) {
+        addHandler(handler, FORMATTER);
     }
 
     public static void removeHandler(Handler handler) {
@@ -110,14 +126,15 @@ public final class Log {
     }
 
     private static LogRecord createLogRecord(final Level level, final String tag,
-                                             @Nullable final String message,
-                                             @Nullable final Throwable th) {
-        final LogRecord record = new LogRecord(level, tag + ": " + (TextUtils.isEmpty(message) ? "" : message));
+                                             final String message,
+                                             final Throwable th) {
+        final LogRecord record = new LogRecord(level, TextUtils.isEmpty(message) ? "" : message);
         record.setThrown(th);
+        record.setLoggerName(tag);
         return record;
     }
 
-    private static String toString(@Nullable final Throwable tr) {
+    private static String toString(final Throwable tr) {
         if (tr == null) {
             return "";
         }

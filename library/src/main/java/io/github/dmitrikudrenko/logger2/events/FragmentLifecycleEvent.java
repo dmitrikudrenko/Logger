@@ -1,7 +1,27 @@
 package io.github.dmitrikudrenko.logger2.events;
 
 public enum FragmentLifecycleEvent implements LogEvent {
-    START {
+    CREATE() {
+        @Override
+        public String getValue() {
+            return "Create fragment";
+        }
+    }, DESTROY {
+        @Override
+        public String getValue() {
+            return "Destroy fragment";
+        }
+    }, CREATE_VIEW {
+        @Override
+        public String getValue() {
+            return "Create fragment view";
+        }
+    }, DESTROY_VIEW {
+        @Override
+        public String getValue() {
+            return "Destroy fragment view";
+        }
+    }, START {
         @Override
         public String getValue() {
             return "Start fragment";
