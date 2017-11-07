@@ -1,6 +1,5 @@
 package io.github.dmitrikudrenko.logger2;
 
-import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import io.github.dmitrikudrenko.logger2.events.LogEvent;
 import io.github.dmitrikudrenko.logger2.impl.AndroidHandler;
@@ -39,7 +38,6 @@ public final class Log {
         }
     };
 
-    @VisibleForTesting
     private static final Logger logger;
 
     static {
