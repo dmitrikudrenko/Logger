@@ -1,5 +1,6 @@
 package io.github.dmitrikudrenko.logger2.impl;
 
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import java.util.logging.Handler;
@@ -23,7 +24,8 @@ public class AndroidHandler extends Handler {
         Log.println(getAndroidLevel(level), tag, getFormatter().format(record));
     }
 
-    private int getAndroidLevel(Level level) {
+    @VisibleForTesting
+    static int getAndroidLevel(Level level) {
         final int value = level.intValue();
         if (value >= SEVERE) {
             return Log.ERROR;
