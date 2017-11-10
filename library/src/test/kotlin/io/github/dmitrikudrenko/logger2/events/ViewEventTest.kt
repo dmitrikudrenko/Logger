@@ -4,7 +4,6 @@ import io.github.dmitrikudrenko.logger2.BasePublishTest
 import io.github.dmitrikudrenko.logger2.Log
 import io.github.dmitrikudrenko.logger2.LogRecordMatcher
 import io.github.dmitrikudrenko.logger2.MOCK_TAG
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.argThat
@@ -37,11 +36,5 @@ class ViewEventTest : BasePublishTest() {
         Log.event(ViewEvent.LONG_CLICK, MOCK_TAG)
         verify<Handler>(handler)
                 .publish(argThat(LogRecordMatcher(Level.INFO, MOCK_TAG, "Long click")))
-    }
-
-    @Test
-    fun `check available view events count`() {
-        val values = ViewEvent.values()
-        assertEquals(values.size, 3)
     }
 }

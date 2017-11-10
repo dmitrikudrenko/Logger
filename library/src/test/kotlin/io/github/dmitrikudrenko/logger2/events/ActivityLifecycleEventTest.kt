@@ -4,7 +4,6 @@ import io.github.dmitrikudrenko.logger2.BasePublishTest
 import io.github.dmitrikudrenko.logger2.Log
 import io.github.dmitrikudrenko.logger2.LogRecordMatcher
 import io.github.dmitrikudrenko.logger2.MOCK_TAG
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Matchers
@@ -57,11 +56,5 @@ class ActivityLifecycleEventTest : BasePublishTest() {
         Log.event(ActivityLifecycleEvent.DESTROY, MOCK_TAG)
         Mockito.verify<Handler>(handler)
                 .publish(Matchers.argThat(LogRecordMatcher(Level.INFO, MOCK_TAG, "Destroy activity")))
-    }
-
-    @Test
-    fun `check available activity lifecycle events count`() {
-        val values = ActivityLifecycleEvent.values()
-        assertEquals(values.size, 6)
     }
 }

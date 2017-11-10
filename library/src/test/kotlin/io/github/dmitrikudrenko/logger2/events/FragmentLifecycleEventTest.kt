@@ -4,7 +4,6 @@ import io.github.dmitrikudrenko.logger2.BasePublishTest
 import io.github.dmitrikudrenko.logger2.Log
 import io.github.dmitrikudrenko.logger2.LogRecordMatcher
 import io.github.dmitrikudrenko.logger2.MOCK_TAG
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Matchers.argThat
@@ -86,11 +85,5 @@ class FragmentLifecycleEventTest : BasePublishTest() {
         Log.event(FragmentLifecycleEvent.DETACH, MOCK_TAG)
         Mockito.verify<Handler>(handler)
                 .publish(argThat(LogRecordMatcher(Level.INFO, MOCK_TAG, "Detach fragment")))
-    }
-
-    @Test
-    fun `check available fragment lifecycle events count`() {
-        val values = FragmentLifecycleEvent.values()
-        assertEquals(values.size, 10)
     }
 }
