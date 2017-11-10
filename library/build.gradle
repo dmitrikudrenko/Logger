@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'jacoco-android'
 
 publish {
     groupId = 'io.github.dmitrikudrenko'
@@ -37,6 +38,11 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
     }
     sourceSets {
         test.java.srcDirs += 'src/test/kotlin'
