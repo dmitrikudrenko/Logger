@@ -1,6 +1,10 @@
-package io.github.dmitrikudrenko.logger2
+package io.github.dmitrikudrenko.logger2.events
 
-import io.github.dmitrikudrenko.logger2.events.FragmentLifecycleEvent
+import io.github.dmitrikudrenko.logger2.BasePublishTest
+import io.github.dmitrikudrenko.logger2.Log
+import io.github.dmitrikudrenko.logger2.LogRecordMatcher
+import io.github.dmitrikudrenko.logger2.MOCK_TAG
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Matchers.argThat
@@ -12,7 +16,7 @@ import java.util.logging.Level
 
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
-class LoggerFragmentLifecycleEventTest : BasePublishTest() {
+class FragmentLifecycleEventTest : BasePublishTest() {
 
     @Test
     fun `should publish "Create" fragment event`() {
@@ -82,5 +86,25 @@ class LoggerFragmentLifecycleEventTest : BasePublishTest() {
         Log.event(FragmentLifecycleEvent.DETACH, MOCK_TAG)
         Mockito.verify<Handler>(handler)
                 .publish(argThat(LogRecordMatcher(Level.INFO, MOCK_TAG, "Detach fragment")))
+    }
+
+    @Test
+    fun `check available fragment lifecycle events count`() {
+        val values = FragmentLifecycleEvent.values()
+        assertEquals(values.size, 10)
+    }
+
+    @Test
+    fun `check fragment lifecycle events names`() {
+        assertEquals(FragmentLifecycleEvent.valueOf("CREATE"), FragmentLifecycleEvent.CREATE)
+        assertEquals(FragmentLifecycleEvent.valueOf("DESTROY"), FragmentLifecycleEvent.DESTROY)
+        assertEquals(FragmentLifecycleEvent.valueOf("CREATE_VIEW"), FragmentLifecycleEvent.CREATE_VIEW)
+        assertEquals(FragmentLifecycleEvent.valueOf("DESTROY_VIEW"), FragmentLifecycleEvent.DESTROY_VIEW)
+        assertEquals(FragmentLifecycleEvent.valueOf("START"), FragmentLifecycleEvent.START)
+        assertEquals(FragmentLifecycleEvent.valueOf("STOP"), FragmentLifecycleEvent.STOP)
+        assertEquals(FragmentLifecycleEvent.valueOf("RESUME"), FragmentLifecycleEvent.RESUME)
+        assertEquals(FragmentLifecycleEvent.valueOf("PAUSE"), FragmentLifecycleEvent.PAUSE)
+        assertEquals(FragmentLifecycleEvent.valueOf("ATTACH"), FragmentLifecycleEvent.ATTACH)
+        assertEquals(FragmentLifecycleEvent.valueOf("DETACH"), FragmentLifecycleEvent.DETACH)
     }
 }
