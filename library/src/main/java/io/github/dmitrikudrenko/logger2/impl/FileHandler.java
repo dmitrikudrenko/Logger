@@ -51,6 +51,11 @@ public class FileHandler extends java.util.logging.FileHandler {
 
     @Override
     public synchronized void publish(final LogRecord record) {
-        executor.execute(() -> super.publish(record));
+        executor.execute(() -> doPublish(record));
+    }
+
+    @VisibleForTesting
+    void doPublish(LogRecord record) {
+        super.publish(record);
     }
 }
