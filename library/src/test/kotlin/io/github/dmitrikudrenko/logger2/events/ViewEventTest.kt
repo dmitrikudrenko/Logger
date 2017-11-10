@@ -44,11 +44,4 @@ class ViewEventTest : BasePublishTest() {
         val values = ViewEvent.values()
         assertEquals(values.size, 3)
     }
-
-    @Test
-    fun `check view events names`() {
-        assertEquals(ViewEvent.valueOf("TOUCH"), ViewEvent.TOUCH)
-        assertEquals(ViewEvent.valueOf("CLICK"), ViewEvent.CLICK)
-        assertEquals(ViewEvent.valueOf("LONG_CLICK"), ViewEvent.LONG_CLICK)
-    }
 }

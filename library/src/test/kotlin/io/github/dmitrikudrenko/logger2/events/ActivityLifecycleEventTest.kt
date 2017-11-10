@@ -64,14 +64,4 @@ class ActivityLifecycleEventTest : BasePublishTest() {
         val values = ActivityLifecycleEvent.values()
         assertEquals(values.size, 6)
     }
-
-    @Test
-    fun `check activity lifecycle events names`() {
-        assertEquals(ActivityLifecycleEvent.valueOf("START"), ActivityLifecycleEvent.START)
-        assertEquals(ActivityLifecycleEvent.valueOf("STOP"), ActivityLifecycleEvent.STOP)
-        assertEquals(ActivityLifecycleEvent.valueOf("RESUME"), ActivityLifecycleEvent.RESUME)
-        assertEquals(ActivityLifecycleEvent.valueOf("PAUSE"), ActivityLifecycleEvent.PAUSE)
-        assertEquals(ActivityLifecycleEvent.valueOf("CREATE"), ActivityLifecycleEvent.CREATE)
-        assertEquals(ActivityLifecycleEvent.valueOf("DESTROY"), ActivityLifecycleEvent.DESTROY)
-    }
 }

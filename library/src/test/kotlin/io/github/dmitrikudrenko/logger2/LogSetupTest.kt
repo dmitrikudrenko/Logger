@@ -28,7 +28,7 @@ class LogSetupTest {
     }
 
     @After
-    fun tearDown() {
+    fun `tear down`() {
         Log.setLogger(null)
     }
 

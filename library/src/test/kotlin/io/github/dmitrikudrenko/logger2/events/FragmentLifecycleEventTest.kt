@@ -93,18 +93,4 @@ class FragmentLifecycleEventTest : BasePublishTest() {
         val values = FragmentLifecycleEvent.values()
         assertEquals(values.size, 10)
     }
-
-    @Test
-    fun `check fragment lifecycle events names`() {
-        assertEquals(FragmentLifecycleEvent.valueOf("CREATE"), FragmentLifecycleEvent.CREATE)
-        assertEquals(FragmentLifecycleEvent.valueOf("DESTROY"), FragmentLifecycleEvent.DESTROY)
-        assertEquals(FragmentLifecycleEvent.valueOf("CREATE_VIEW"), FragmentLifecycleEvent.CREATE_VIEW)
-        assertEquals(FragmentLifecycleEvent.valueOf("DESTROY_VIEW"), FragmentLifecycleEvent.DESTROY_VIEW)
-        assertEquals(FragmentLifecycleEvent.valueOf("START"), FragmentLifecycleEvent.START)
-        assertEquals(FragmentLifecycleEvent.valueOf("STOP"), FragmentLifecycleEvent.STOP)
-        assertEquals(FragmentLifecycleEvent.valueOf("RESUME"), FragmentLifecycleEvent.RESUME)
-        assertEquals(FragmentLifecycleEvent.valueOf("PAUSE"), FragmentLifecycleEvent.PAUSE)
-        assertEquals(FragmentLifecycleEvent.valueOf("ATTACH"), FragmentLifecycleEvent.ATTACH)
-        assertEquals(FragmentLifecycleEvent.valueOf("DETACH"), FragmentLifecycleEvent.DETACH)
-    }
 }

@@ -4,9 +4,8 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import io.github.dmitrikudrenko.logger2.events.LogEvent;
 import io.github.dmitrikudrenko.logger2.impl.AndroidHandler;
+import io.github.dmitrikudrenko.logger2.utils.Utils;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -18,37 +17,47 @@ public final class Log {
     public static final Level VERBOSE = new Verbose();
     public static final Level DEBUG = new Debug();
 
-    private static final Formatter SIMPLE_FORMATTER = new Formatter() {
-        @Override
-        public String format(final LogRecord r) {
-            final Throwable thrown = r.getThrown();
-            String message;
-            if (thrown != null) {
-                message = Log.toString(thrown);
-            } else {
-                message = r.getMessage();
-            }
-            return message;
-        }
-    };
-
-    private static final Formatter FORMATTER = new Formatter() {
-        @Override
-        public String format(LogRecord record) {
-            return record.getLoggerName() + ": " + SIMPLE_FORMATTER.format(record) + "\n";
-        }
-    };
-
+    private static Formatter logcatFormatter;
+    private static Formatter formatter;
     private static Logger logger;
+    private static Handler handler;
 
     static {
         initDefault();
+        initDefaultFormatters();
+        initDefaultHandler();
     }
 
     private static void initDefault() {
         final LogManager manager = LogManager.getLogManager();
         logger = manager.getLogger("");
         logger.setLevel(Level.ALL);
+    }
+
+    private static void initDefaultFormatters() {
+        logcatFormatter = new Formatter() {
+            @Override
+            public String format(LogRecord record) {
+                final Throwable thrown = record.getThrown();
+                String message;
+                if (thrown != null) {
+                    message = Utils.toString(thrown);
+                } else {
+                    message = record.getMessage();
+                }
+                return message;
+            }
+        };
+        formatter = new Formatter() {
+            @Override
+            public String format(LogRecord record) {
+                return record.getLoggerName() + ": " + logcatFormatter.format(record) + "\n";
+            }
+        };
+    }
+
+    private static void initDefaultHandler() {
+        handler = new AndroidHandler();
     }
 
     @VisibleForTesting
@@ -60,8 +69,27 @@ public final class Log {
         }
     }
 
+    @VisibleForTesting
+    static void setFormatter(Formatter logcatFormatter, Formatter formatter) {
+        if (logcatFormatter != null && formatter != null) {
+            Log.logcatFormatter = logcatFormatter;
+            Log.formatter = formatter;
+        } else {
+            initDefaultFormatters();
+        }
+    }
+
+    @VisibleForTesting
+    static void setDefaultHandler(Handler handler) {
+        if (handler != null) {
+            Log.handler = handler;
+        } else {
+            initDefaultHandler();
+        }
+    }
+
     public static void setup() {
-        addHandler(new AndroidHandler(), SIMPLE_FORMATTER);
+        addHandler(handler, logcatFormatter);
     }
 
     private static void addHandler(Handler handler, Formatter formatter) {
@@ -70,7 +98,7 @@ public final class Log {
     }
 
     public static void addHandler(Handler handler) {
-        addHandler(handler, FORMATTER);
+        addHandler(handler, formatter);
     }
 
     public static void removeHandler(Handler handler) {
@@ -95,10 +123,6 @@ public final class Log {
 
     public static void w(final String tag, final String message) {
         logger.log(createLogRecord(Level.WARNING, tag, message));
-    }
-
-    public static void w(final String tag, final Throwable th) {
-        logger.log(createLogRecord(Level.WARNING, tag, th));
     }
 
     public static void w(final String tag, final String message, final Throwable th) {
@@ -133,10 +157,6 @@ public final class Log {
         return createLogRecord(level, tag, message, null);
     }
 
-    private static LogRecord createLogRecord(final Level level, final String tag, final Throwable th) {
-        return createLogRecord(level, tag, null, th);
-    }
-
     private static LogRecord createLogRecord(final Level level, final String tag,
                                              final String message,
                                              final Throwable th) {
@@ -144,16 +164,6 @@ public final class Log {
         record.setThrown(th);
         record.setLoggerName(tag);
         return record;
-    }
-
-    private static String toString(final Throwable tr) {
-        if (tr == null) {
-            return "";
-        }
-        final StringWriter sw = new StringWriter();
-        final PrintWriter pw = new PrintWriter(sw);
-        tr.printStackTrace(pw);
-        return sw.toString();
     }
 
     private static class Verbose extends Level {
