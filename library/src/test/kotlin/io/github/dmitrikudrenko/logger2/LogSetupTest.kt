@@ -19,16 +19,27 @@ import java.util.logging.Logger
 class LogSetupTest {
     private var logger: Logger? = null
     private var handler: Handler? = null
+    private var androidHandler: AndroidHandler? = null
+    private var logcatFormatter: Formatter? = null
+    private var formatter: Formatter? = null
 
     @Before
     fun `set up`() {
         logger = mock(Logger::class.java)
         handler = mock(Handler::class.java)
+        androidHandler = mock(AndroidHandler::class.java)
+        logcatFormatter = mock(Formatter::class.java)
+        formatter = mock(Formatter::class.java)
+
+        Log.setDefaultHandler(androidHandler)
+        Log.setFormatter(logcatFormatter, formatter)
         Log.setLogger(logger)
     }
 
     @After
     fun `tear down`() {
+        Log.setDefaultHandler(null)
+        Log.setFormatter(null, null)
         Log.setLogger(null)
     }
 
@@ -54,5 +65,17 @@ class LogSetupTest {
     fun `should set formatter to new handler`() {
         Log.addHandler(handler)
         verify<Handler>(handler).formatter = Matchers.any(Formatter::class.java)
+    }
+
+    @Test
+    fun `should set logcat formatter if setup`() {
+        Log.setup()
+        verify<AndroidHandler>(androidHandler).formatter = logcatFormatter
+    }
+
+    @Test
+    fun `should set formatter if add handler`() {
+        Log.addHandler(handler)
+        verify<Handler>(handler).formatter = formatter
     }
 }

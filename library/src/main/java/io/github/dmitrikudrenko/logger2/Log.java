@@ -1,7 +1,6 @@
 package io.github.dmitrikudrenko.logger2;
 
 import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
 import io.github.dmitrikudrenko.logger2.events.LogEvent;
 import io.github.dmitrikudrenko.logger2.impl.AndroidHandler;
 import io.github.dmitrikudrenko.logger2.utils.Utils;
@@ -22,6 +21,9 @@ public final class Log {
     private static Logger logger;
     private static Handler handler;
 
+    private Log() {
+    }
+
     static {
         initDefault();
         initDefaultFormatters();
@@ -38,20 +40,13 @@ public final class Log {
         logcatFormatter = new Formatter() {
             @Override
             public String format(LogRecord record) {
-                final Throwable thrown = record.getThrown();
-                String message;
-                if (thrown != null) {
-                    message = Utils.toString(thrown);
-                } else {
-                    message = record.getMessage();
-                }
-                return message;
+                return Utils.formatForConsole(record);
             }
         };
         formatter = new Formatter() {
             @Override
             public String format(LogRecord record) {
-                return record.getLoggerName() + ": " + logcatFormatter.format(record) + "\n";
+                return Utils.format(record);
             }
         };
     }
@@ -160,7 +155,7 @@ public final class Log {
     private static LogRecord createLogRecord(final Level level, final String tag,
                                              final String message,
                                              final Throwable th) {
-        final LogRecord record = new LogRecord(level, TextUtils.isEmpty(message) ? "" : message);
+        final LogRecord record = new LogRecord(level, Utils.defaultIfNull(message));
         record.setThrown(th);
         record.setLoggerName(tag);
         return record;
