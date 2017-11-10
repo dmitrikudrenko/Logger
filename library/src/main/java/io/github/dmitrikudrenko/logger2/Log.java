@@ -1,5 +1,6 @@
 package io.github.dmitrikudrenko.logger2;
 
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import io.github.dmitrikudrenko.logger2.events.LogEvent;
 import io.github.dmitrikudrenko.logger2.impl.AndroidHandler;
@@ -14,8 +15,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public final class Log {
-    private static final Level VERBOSE = new Verbose();
-    private static final Level DEBUG = new Debug();
+    public static final Level VERBOSE = new Verbose();
+    public static final Level DEBUG = new Debug();
 
     private static final Formatter SIMPLE_FORMATTER = new Formatter() {
         @Override
@@ -38,12 +39,25 @@ public final class Log {
         }
     };
 
-    private static final Logger logger;
+    private static Logger logger;
 
     static {
+        initDefault();
+    }
+
+    private static void initDefault() {
         final LogManager manager = LogManager.getLogManager();
         logger = manager.getLogger("");
         logger.setLevel(Level.ALL);
+    }
+
+    @VisibleForTesting
+    static void setLogger(Logger logger) {
+        if (logger != null) {
+            Log.logger = logger;
+        } else {
+            initDefault();
+        }
     }
 
     public static void setup() {

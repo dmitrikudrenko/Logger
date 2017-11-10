@@ -8,10 +8,10 @@ import java.util.logging.LogRecord;
 
 public class AndroidHandler extends Handler {
 
-    private static final int SEVERE = 1000;
-    private static final int WARNING = 900;
-    private static final int INFO = 800;
-    private static final int CONFIG = 700;
+    private static final int SEVERE = Level.SEVERE.intValue();
+    private static final int WARNING = Level.WARNING.intValue();
+    private static final int INFO = Level.INFO.intValue();
+    private static final int CONFIG = Level.CONFIG.intValue();
 
     @Override
     public void publish(LogRecord record) {
