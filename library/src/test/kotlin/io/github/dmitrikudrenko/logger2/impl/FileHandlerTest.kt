@@ -1,6 +1,8 @@
 package io.github.dmitrikudrenko.logger2.impl
 
+import io.github.dmitrikudrenko.logger2.Log
 import io.github.dmitrikudrenko.logger2.MOCK_MESSAGE
+import io.github.dmitrikudrenko.logger2.MOCK_TAG
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -25,12 +27,19 @@ class FileHandlerTest {
         handler = spy(FileHandler())
         executor = mock(Executor::class.java)
         handler?.setExecutor(executor)
+        Log.addHandler(handler)
         logRecord = LogRecord(Level.INFO, MOCK_MESSAGE)
     }
 
     @After
     fun `tear down`() {
         handler?.setExecutor(null)
+    }
+
+    @Test
+    fun `should handler be published if event`() {
+        Log.i(MOCK_TAG, MOCK_MESSAGE)
+        verify<FileHandler>(handler).publish(any(LogRecord::class.java))
     }
 
     @Test
