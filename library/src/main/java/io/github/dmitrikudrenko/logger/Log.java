@@ -1,9 +1,9 @@
-package io.github.dmitrikudrenko.logger2;
+package io.github.dmitrikudrenko.logger;
 
 import android.support.annotation.VisibleForTesting;
-import io.github.dmitrikudrenko.logger2.events.LogEvent;
-import io.github.dmitrikudrenko.logger2.impl.AndroidHandler;
-import io.github.dmitrikudrenko.logger2.utils.Utils;
+import io.github.dmitrikudrenko.logger.events.LogEvent;
+import io.github.dmitrikudrenko.logger.impl.AndroidHandler;
+import io.github.dmitrikudrenko.logger.utils.Utils;
 
 import java.util.logging.Formatter;
 import java.util.logging.Handler;

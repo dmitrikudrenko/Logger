@@ -7,8 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import io.github.dmitrikudrenko.logger2.Log;
-import io.github.dmitrikudrenko.logger2.events.FragmentLifecycleEvent;
+import io.github.dmitrikudrenko.logger.Log;
+import io.github.dmitrikudrenko.logger.events.FragmentLifecycleEvent;
 
 public class GenericFragment extends Fragment {
     @Override

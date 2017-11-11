@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger2.events;
+package io.github.dmitrikudrenko.logger.events;
 
 public enum ViewEvent implements LogEvent {
     TOUCH {

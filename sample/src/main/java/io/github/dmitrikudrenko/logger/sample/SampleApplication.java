@@ -1,8 +1,8 @@
 package io.github.dmitrikudrenko.logger.sample;
 
 import android.app.Application;
-import io.github.dmitrikudrenko.logger2.Log;
-import io.github.dmitrikudrenko.logger2.impl.FileHandler;
+import io.github.dmitrikudrenko.logger.Log;
+import io.github.dmitrikudrenko.logger.impl.FileHandler;
 
 import java.io.File;
 import java.io.IOException;

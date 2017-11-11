@@ -1,6 +1,6 @@
-package io.github.dmitrikudrenko.logger2.impl
+package io.github.dmitrikudrenko.logger.impl
 
-import io.github.dmitrikudrenko.logger2.Log
+import io.github.dmitrikudrenko.logger.Log
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

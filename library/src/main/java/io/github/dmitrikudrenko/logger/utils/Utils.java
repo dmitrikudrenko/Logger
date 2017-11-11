@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger2.utils;
+package io.github.dmitrikudrenko.logger.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

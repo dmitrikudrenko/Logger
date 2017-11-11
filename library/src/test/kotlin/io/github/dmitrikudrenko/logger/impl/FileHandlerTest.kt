@@ -1,9 +1,9 @@
-package io.github.dmitrikudrenko.logger2.impl
+package io.github.dmitrikudrenko.logger.impl
 
-import io.github.dmitrikudrenko.logger2.Log
-import io.github.dmitrikudrenko.logger2.MOCK_MESSAGE
-import io.github.dmitrikudrenko.logger2.MOCK_TAG
-import io.github.dmitrikudrenko.logger2.`make executor sync`
+import io.github.dmitrikudrenko.logger.Log
+import io.github.dmitrikudrenko.logger.MOCK_MESSAGE
+import io.github.dmitrikudrenko.logger.MOCK_TAG
+import io.github.dmitrikudrenko.logger.`make executor sync`
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

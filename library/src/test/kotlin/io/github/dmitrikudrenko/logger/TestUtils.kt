@@ -1,6 +1,6 @@
-package io.github.dmitrikudrenko.logger2
+package io.github.dmitrikudrenko.logger
 
-import io.github.dmitrikudrenko.logger2.events.LogEvent
+import io.github.dmitrikudrenko.logger.events.LogEvent
 import org.mockito.ArgumentMatcher
 import org.mockito.Mockito
 import java.util.concurrent.Executor

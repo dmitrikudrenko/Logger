@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger2.events;
+package io.github.dmitrikudrenko.logger.events;
 
 public enum ActivityLifecycleEvent implements LogEvent {
     START {

@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger2
+package io.github.dmitrikudrenko.logger
 
 import org.junit.After
 import org.junit.Before

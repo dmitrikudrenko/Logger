@@ -1,8 +1,8 @@
-package io.github.dmitrikudrenko.logger2.utils
+package io.github.dmitrikudrenko.logger.utils
 
-import io.github.dmitrikudrenko.logger2.MOCK_EXCEPTION
-import io.github.dmitrikudrenko.logger2.MOCK_MESSAGE
-import io.github.dmitrikudrenko.logger2.MOCK_TAG
+import io.github.dmitrikudrenko.logger.MOCK_EXCEPTION
+import io.github.dmitrikudrenko.logger.MOCK_MESSAGE
+import io.github.dmitrikudrenko.logger.MOCK_TAG
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

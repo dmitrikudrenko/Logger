@@ -3,8 +3,8 @@ package io.github.dmitrikudrenko.logger.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
-import io.github.dmitrikudrenko.logger2.Log;
-import io.github.dmitrikudrenko.logger2.events.ActivityLifecycleEvent;
+import io.github.dmitrikudrenko.logger.Log;
+import io.github.dmitrikudrenko.logger.events.ActivityLifecycleEvent;
 
 public abstract class GenericActivity extends Activity {
     @Override

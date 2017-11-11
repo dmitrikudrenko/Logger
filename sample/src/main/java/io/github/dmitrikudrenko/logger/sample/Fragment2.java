@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import io.github.dmitrikudrenko.logger2.Log;
-import io.github.dmitrikudrenko.logger2.events.ViewEvent;
+import io.github.dmitrikudrenko.logger.Log;
+import io.github.dmitrikudrenko.logger.events.ViewEvent;
 
 public class Fragment2 extends GenericFragment {
     @Nullable

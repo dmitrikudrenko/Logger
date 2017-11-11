@@ -1,6 +1,6 @@
-package io.github.dmitrikudrenko.logger2
+package io.github.dmitrikudrenko.logger
 
-import io.github.dmitrikudrenko.logger2.impl.AndroidHandler
+import io.github.dmitrikudrenko.logger.impl.AndroidHandler
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

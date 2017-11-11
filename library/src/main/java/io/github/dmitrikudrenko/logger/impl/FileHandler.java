@@ -1,4 +1,4 @@
-package io.github.dmitrikudrenko.logger2.impl;
+package io.github.dmitrikudrenko.logger.impl;
 
 import android.support.annotation.VisibleForTesting;
 

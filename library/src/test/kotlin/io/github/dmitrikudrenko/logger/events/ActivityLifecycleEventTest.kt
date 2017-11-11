@@ -1,9 +1,9 @@
-package io.github.dmitrikudrenko.logger2.events
+package io.github.dmitrikudrenko.logger.events
 
-import io.github.dmitrikudrenko.logger2.BasePublishTest
-import io.github.dmitrikudrenko.logger2.Log
-import io.github.dmitrikudrenko.logger2.LogRecordMatcher
-import io.github.dmitrikudrenko.logger2.MOCK_TAG
+import io.github.dmitrikudrenko.logger.BasePublishTest
+import io.github.dmitrikudrenko.logger.Log
+import io.github.dmitrikudrenko.logger.LogRecordMatcher
+import io.github.dmitrikudrenko.logger.MOCK_TAG
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Matchers
