@@ -3,6 +3,17 @@ Logger
 
 Simple alternative to android Log
 
+Sample
+------
+Call if you want to enable android logcat
+```Log.setup()```
+
+You can enable your own ```java.logging.Handler``` by
+```Log.addHandler(Handler handler)```
+
+Logger has wrapper for ```java.logging.FileHandler``` that writes to file asynchronously. Just call
+```Log.addHandler(io.github.dmitrikudrenko.logger.impl.FileHandler handler)```
+
 Download
 --------
 [ ![Download](https://api.bintray.com/packages/dmitrikudrenko/maven/Logger/images/download.svg) ](https://bintray.com/dmitrikudrenko/maven/Logger/_latestVersion)
