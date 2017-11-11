@@ -14,13 +14,7 @@ android:
 jdk:
   - oraclejdk8
 
-before_install:
-  - pip install --user codecov    #Install codecov
-
 after_success:
-  - codecov                       #Run codecov
   - .buildscript/deploy_snapshot.sh
-
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
 
 script: ./gradlew build

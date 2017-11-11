@@ -9,8 +9,8 @@ publish {
     publishVersion = libraryVersionName
     desc = 'Simple alternative to android Log.'
     licences = ['Apache-2.0']
-    uploadName = 'Log'
-    website = 'https://github.com/dmitrikudrenko/Log'
+    uploadName = 'Logger'
+    website = 'https://github.com/dmitrikudrenko/Logger'
 }
 
 android {
