@@ -3,15 +3,17 @@ package io.github.dmitrikudrenko.logger2
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Matchers.argThat
+import org.mockito.Mockito
 import org.mockito.Mockito.verify
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.util.logging.Handler
 import java.util.logging.Level
+import java.util.logging.LogRecord
 
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
-class LoggerPublishTest : BasePublishTest() {
+class LogPublishTest : BasePublishTest() {
 
     @Test
     fun `should verbose record invoked`() {
@@ -95,5 +97,11 @@ class LoggerPublishTest : BasePublishTest() {
         Log.event(MOCK_EVENT, MOCK_TAG)
         verify<Handler>(handler)
                 .publish(argThat(LogRecordMatcher(Level.INFO, MOCK_TAG, MOCK_EVENT_VALUE)))
+    }
+
+    @Test
+    fun `should handler be published if event`() {
+        Log.i(MOCK_TAG, MOCK_MESSAGE)
+        Mockito.verify<Handler>(androidHandler).publish(Mockito.any(LogRecord::class.java))
     }
 }

@@ -2,6 +2,8 @@ package io.github.dmitrikudrenko.logger2
 
 import io.github.dmitrikudrenko.logger2.events.LogEvent
 import org.mockito.ArgumentMatcher
+import org.mockito.Mockito
+import java.util.concurrent.Executor
 import java.util.logging.Level
 import java.util.logging.LogRecord
 
@@ -25,5 +27,11 @@ class LogRecordMatcher(private val level: Level,
         }
         return false
     }
+}
 
+fun `make executor sync`(executor: Executor) {
+    Mockito.doAnswer { invocation ->
+        (invocation.arguments[0] as Runnable).run()
+        null
+    }.`when`(executor).execute(Mockito.any(Runnable::class.java))
 }

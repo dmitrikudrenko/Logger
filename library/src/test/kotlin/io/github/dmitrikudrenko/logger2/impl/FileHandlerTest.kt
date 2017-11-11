@@ -3,6 +3,7 @@ package io.github.dmitrikudrenko.logger2.impl
 import io.github.dmitrikudrenko.logger2.Log
 import io.github.dmitrikudrenko.logger2.MOCK_MESSAGE
 import io.github.dmitrikudrenko.logger2.MOCK_TAG
+import io.github.dmitrikudrenko.logger2.`make executor sync`
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import java.lang.IllegalArgumentException
 import java.util.concurrent.Executor
 import java.util.logging.Level
 import java.util.logging.LogRecord
@@ -18,6 +20,7 @@ import java.util.logging.LogRecord
 @RunWith(RobolectricTestRunner::class)
 @Config(manifest = Config.NONE)
 class FileHandlerTest {
+    private val pattern = "pattern"
     private var handler: FileHandler? = null
     private var executor: Executor? = null
     private var logRecord: LogRecord? = null
@@ -50,15 +53,31 @@ class FileHandlerTest {
 
     @Test
     fun `should do publish be executed if publish`() {
-        implementAsDirectExecutor(executor!!)
+        `make executor sync`(executor!!)
         handler?.publish(logRecord)
         verify<FileHandler>(handler).doPublish(logRecord)
     }
 
-    private fun implementAsDirectExecutor(executor: Executor) {
-        doAnswer { invocation ->
-            (invocation.arguments[0] as Runnable).run()
-            null
-        }.`when`(executor).execute(any(Runnable::class.java))
+    @Test
+    fun `test constructors`() {
+        FileHandler(pattern)
+        FileHandler(pattern, true)
+        FileHandler(pattern, 1, 1)
+        FileHandler(pattern, 1, 1, true)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `should not empty pattern be accepted`() {
+        FileHandler("")
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `should not negative limit be accepted`() {
+        FileHandler(pattern, -1, 1)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `should not 0 count be accepted`() {
+        FileHandler(pattern, 1, 0)
     }
 }
