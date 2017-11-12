@@ -1,29 +1,19 @@
 package io.github.dmitrikudrenko.logger.impl
 
-import io.github.dmitrikudrenko.logger.Log
-import io.github.dmitrikudrenko.logger.MOCK_MESSAGE
-import io.github.dmitrikudrenko.logger.MOCK_TAG
-import io.github.dmitrikudrenko.logger.`make executor sync`
+import io.github.dmitrikudrenko.logger.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito.*
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import java.lang.IllegalArgumentException
 import java.util.concurrent.Executor
-import java.util.logging.Level
 import java.util.logging.LogRecord
 
 
-@RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE)
 class FileHandlerTest {
     private val pattern = "pattern"
     private var handler: FileHandler? = null
     private var executor: Executor? = null
-    private var logRecord: LogRecord? = null
 
     @Before
     fun `set up`() {
@@ -31,7 +21,6 @@ class FileHandlerTest {
         executor = mock(Executor::class.java)
         handler?.setExecutor(executor)
         Log.addHandler(handler)
-        logRecord = LogRecord(Level.INFO, MOCK_MESSAGE)
     }
 
     @After
@@ -47,15 +36,15 @@ class FileHandlerTest {
 
     @Test
     fun `should service be executed if publish`() {
-        handler?.publish(logRecord)
+        handler?.publish(MOCK_LOG_RECORD)
         verify<Executor>(executor).execute(any())
     }
 
     @Test
     fun `should do publish be executed if publish`() {
         `make executor sync`(executor!!)
-        handler?.publish(logRecord)
-        verify<FileHandler>(handler).doPublish(logRecord)
+        handler?.publish(MOCK_LOG_RECORD)
+        verify<FileHandler>(handler).doPublish(MOCK_LOG_RECORD)
     }
 
     @Test

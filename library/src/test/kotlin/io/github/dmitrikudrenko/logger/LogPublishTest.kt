@@ -1,18 +1,13 @@
 package io.github.dmitrikudrenko.logger
 
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Matchers.argThat
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import java.util.logging.Handler
 import java.util.logging.Level
 import java.util.logging.LogRecord
 
-@RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE)
 class LogPublishTest : BasePublishTest() {
 
     @Test

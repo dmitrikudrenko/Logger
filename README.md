@@ -1,7 +1,7 @@
 Logger
 ========
 
-Simple alternative to android Log
+Simple alternative to android Log.
 
 Sample
 ------
@@ -32,6 +32,13 @@ Maven
 Gradle
 ```groovy
 compile 'io.github.dmitrikudrenko:logger:$latestVersion'
+```
+
+Run tests (99% test coverage)
+=============================
+```groovy
+gradlew testDebugUnitTestCoverage --for Debug
+gradlew testReleaseUnitTestCoverage --for Release
 ```
 
 License
