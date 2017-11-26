@@ -21,7 +21,12 @@ public class AndroidHandler extends Handler {
         if (tag.length() > 23) {
             tag = tag.substring(0, 23);
         }
-        Log.println(getAndroidLevel(level), tag, getFormatter().format(record));
+        printLog(level, tag, getFormatter().format(record));
+    }
+
+    @VisibleForTesting
+    void printLog(Level level, String tag, String message) {
+        Log.println(getAndroidLevel(level), tag, message);
     }
 
     @VisibleForTesting

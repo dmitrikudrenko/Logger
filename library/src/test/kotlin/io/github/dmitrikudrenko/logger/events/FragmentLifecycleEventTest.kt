@@ -5,16 +5,11 @@ import io.github.dmitrikudrenko.logger.Log
 import io.github.dmitrikudrenko.logger.LogRecordMatcher
 import io.github.dmitrikudrenko.logger.MOCK_TAG
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Matchers.argThat
 import org.mockito.Mockito
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import java.util.logging.Handler
 import java.util.logging.Level
 
-@RunWith(RobolectricTestRunner::class)
-@Config(manifest = Config.NONE)
 class FragmentLifecycleEventTest : BasePublishTest() {
 
     @Test

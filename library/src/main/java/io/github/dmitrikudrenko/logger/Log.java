@@ -16,10 +16,33 @@ public final class Log {
     public static final Level VERBOSE = new Verbose();
     public static final Level DEBUG = new Debug();
 
-    private static Formatter logcatFormatter;
-    private static Formatter formatter;
+    @SuppressWarnings("WeakerAccess")
+    @VisibleForTesting
+    static Formatter logcatFormatter;
+    @SuppressWarnings("WeakerAccess")
+    @VisibleForTesting
+    static Formatter formatter;
+
     private static Logger logger;
     private static Handler handler;
+
+    @SuppressWarnings("WeakerAccess")
+    @VisibleForTesting
+    static final Formatter DEFAULT_LOGCAT_FORMATTER = new Formatter() {
+        @Override
+        public String format(LogRecord record) {
+            return Utils.formatForConsole(record);
+        }
+    };
+
+    @SuppressWarnings("WeakerAccess")
+    @VisibleForTesting
+    static final Formatter DEFAULT_FORMATTER = new Formatter() {
+        @Override
+        public String format(LogRecord record) {
+            return Utils.format(record);
+        }
+    };
 
     private Log() {
     }
@@ -37,18 +60,8 @@ public final class Log {
     }
 
     private static void initDefaultFormatters() {
-        logcatFormatter = new Formatter() {
-            @Override
-            public String format(LogRecord record) {
-                return Utils.formatForConsole(record);
-            }
-        };
-        formatter = new Formatter() {
-            @Override
-            public String format(LogRecord record) {
-                return Utils.format(record);
-            }
-        };
+        logcatFormatter = DEFAULT_LOGCAT_FORMATTER;
+        formatter = DEFAULT_FORMATTER;
     }
 
     private static void initDefaultHandler() {
