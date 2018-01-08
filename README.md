@@ -18,6 +18,7 @@ Download
 --------
 [ ![Download](https://api.bintray.com/packages/dmitrikudrenko/maven/Logger/images/download.svg) ](https://bintray.com/dmitrikudrenko/maven/Logger/_latestVersion)
 [![Build Status](https://travis-ci.org/dmitrikudrenko/Logger.svg?branch=master)](https://travis-ci.org/dmitrikudrenko/Logger)
+[![codecov](https://codecov.io/gh/dmitrikudrenko/Logger/branch/master/graph/badge.svg)](https://codecov.io/gh/dmitrikudrenko/Logger)
 
 Maven
 ```xml
@@ -32,13 +33,6 @@ Maven
 Gradle
 ```groovy
 compile 'io.github.dmitrikudrenko:logger:$latestVersion'
-```
-
-Run tests (99% test coverage)
-=============================
-```groovy
-gradlew testDebugUnitTestCoverage --for Debug
-gradlew testReleaseUnitTestCoverage --for Release
 ```
 
 License
