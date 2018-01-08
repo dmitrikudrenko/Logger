@@ -16,5 +16,7 @@ jdk:
 
 after_success:
   - .buildscript/deploy_snapshot.sh
+  - bash <(curl -s https://codecov.io/bash)
 
-script: ./gradlew build
+script:
+  - ./gradlew build jacocoTestReport
